@@ -1,0 +1,682 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+   
+</style>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-214815640-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-214815640-1');
+    </script>
+    <script src=”http://code.jquery.com/jquery-1.9.1.js”></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.css" />
+    <title>Directed Ray Distance Functions</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <meta property="og:title" content="Directed Ray Distance Functions" />
+    <meta property="og:image" content="assets/gifs/9462.gif" />
+    <meta name="twitter:card" content="summary_large_image">
+    </meta>
+    <meta property="og:description" content="N. Kulkarni, J. Johnson, D. Fouhey." />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+
+
+</head>
+
+<body>
+    <br>
+    <table width=1000px>
+        <tr>
+            <td>
+                <center>
+                    <span style="font-size:42px">Learning to predict Scene Level  </span>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <center>
+                    <span style="font-size:42px">Implicit 3D from Posed RGBD data</span>
+                </center>
+            </td>
+        </tr>
+    </table>
+
+    <br><br>
+    <table align=center width=1000px>
+        <tr>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px"><a href="https://nileshkulkarni.github.io/">Nilesh Kulkarni</a></span>
+                </center>
+            </td>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px"><a href="https://jinlinyi.github.io/">Linyi Jin</a></span>
+                </center>
+            </td>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px"><a href="https://web.eecs.umich.edu/~justincj/">Justin
+                            Johnson</a></span>
+                </center>
+            </td>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px"><a href="https://web.eecs.umich.edu/~fouhey/">David F.
+                            Fouhey</a></span>
+                </center>
+            </td>
+
+        </tr>
+    </table>
+
+    <br>
+    <table align=center width=1000px>
+        <tr>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px">University of Michigan, Ann Arbor</span>
+                </center>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <table align=center width=400px>
+        <tr>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px">CVPR 2023</span>
+                </center>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <table width=1000px>
+        <tr>
+            <td>
+                <table align=center width=300px>
+                    <tr>
+                        <td align=center width=100px>
+                            <center>
+                                <span style="font-size:20px"><a href="./assets/paper.pdf">[pdf]</a></span>
+                            </center>
+                        </td>
+                        <!-- <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px"><a href="./assets/supp.pdf">[supp]</a></span>
+                </center>
+            </td> -->
+                        <td align=center width=100px>
+                            <center>
+                                <span style="font-size:20px"><a
+                                        href="http://www.github.com/nileshkulkarni/d2drdf/">[code]</a></span>
+                            </center>
+                        </td>
+                        <td align=center width=100px>
+                            <center>
+                                <span style="font-size:20px"><a href="https://www.youtube.com/watch?v=cp7iMF9JWHM">[video]</a></span>
+                            </center>
+                        </td>
+                        <!-- <td align=center width=100px>
+        <center>
+        <span style="font-size:20px"><a href="https://www.youtube.com/watch?v=93M3ou4mg-w&feature=youtu.be">[video]</a></span>
+        </center>
+        </td> -->
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table align=center width=400px>
+        <tr>
+            <td align=center width=100px>
+                <center>
+                    <span style="font-size:20px"></span>
+                </center>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <table align=center width=1000px>
+        <tr>
+            <td>
+                <center>
+                    <!-- <a href="./asserts/images/teaser.png"><img src="./resources/images/teaser.png"
+                            width="900px"></img></href></a><br> -->
+                    <embed src="./assets/figures/teaser.png" width="1100px" />
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!-- <center>
+                    <span style="font-size:22px">Our approach generates 3D from a single unseen image (left) while
+                            training on real 3D scans. We show the two rendered novel views of our output (middle,
+                            right). Visible surfaces are colored by the image and occluded ones are colored with surface
+                            normals: pink is upwards and lavender faces the camera. We can observe the occluded cabinet
+                            and floors behind the couch.
+                </center> -->
+                <div class="text_div" style="font-size:22px">
+                    We introduce a method that can learn to predict scene-level implicit functions for 3D reconstruction from posed RGBD data. 
+                    At test time, our system maps a previously unseen RGB image to a 3D reconstruction of a scene via implicit functions. 
+                    While implicit functions for 3D reconstruction have often been tied to meshes, we show that we can train one using only a set of posed RGBD images. 
+                    This setting may help 3D reconstruction unlock the sea of accelerometer+RGBD data that is coming with new phones. 
+                    Our system, D2-DRDF, can match and sometimes outperform current methods that use mesh supervision and shows better robustness to sparse data.
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <hr>
+    <table align="center" width=1000px>
+        <tr>
+            <td class="td-center">
+                <span style="font-size:22px">  </span>
+            </td>
+        </tr>
+    </table>
+    <table align="center" width=1000px>
+        <tr>
+            <td>
+
+                <div class="container">
+                <video id="glass" width="500" autoplay muted loop>
+                    <source src="assets/videos/matterport_novel_1.mp4" type="video/mp4">
+                </video>
+            </div>
+            </td>
+            <td>
+                <div class="container">
+                    <video id="glass" width="500" autoplay muted loop>
+                        <source src="assets/videos/matterport_novel_2.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <div height=40></div>
+        </tr>
+        <tr>
+            <td>
+
+                <div class="container">
+                <video id="glass" width="500" autoplay muted loop>
+                    <source src="assets/videos/omnidata_novel_1.mp4" type="video/mp4">
+                </video>
+            </div>
+            </td>
+            <td>
+                <div class="container">
+                    <video id="glass" width="500" autoplay muted loop>
+                        <source src="assets/videos/omnidata_novel_2.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table align="center" width=1000px>
+        <tr><td style="font-size: 22px;"><div class="text_div"> <b>Sample results generated by our model on unseen images from Matterport3D (top), and OmniData (bottom)
+            dataset.</b> D2-DRDF is able to recover occluded parts of the floor image, back of the couch. It can recover complete empty rooms behind walls. 
+        </div></td></tr>
+    </table>
+    <hr>
+    <br>
+
+    <table align=center width=1000px>
+        <tr>
+            <td class="td-center">
+                <h1> Overview</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="text_div" style="font-size:22px">
+                    We present an approach for scene-level 3D reconstruction, including occluded regions, from an unseen
+                    RGB image. Our approach is trained on posed RGB and depth data. Our model is trained to predict the <a href="https://nileshkulkarni.github.io/scene_drdf"> Directed Ray Distance Function </a> (DRDF)
+                    
+                    In this work we show how to geometrical supervise this DRDF function, by partial observations from auxilary views. Our key insights are the following
+                    <ul>
+                        <li> 
+                            Auxiliary views observe occluded regions corresponding to a ray in reference view. Auxiliary views observe parts of the ray that are free space.
+                        </li>
+                        <li>
+                            Combining information across auxilary views leads to a "ray signature" which helps supervise different segments along the ray by using equality and in-equality constraints on the predicted values of DRDF.
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <hr>
+    <center>
+        <table align=center width=1000px>
+            <!-- <h1>Approach</h1> -->
+            <tr>
+                <td class="td-center">
+                    <h1>Approach</h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-center"> <div class="text_div" style="font-size:22px">  We present an approach to train a model to predict 3D from single images. 
+                    Our model is supervised with Posed RGBD data, below we highlight the key ideas.
+                    </div> </td>
+            </tr>
+        </table>
+        <div class="text_div">
+        </div>
+        <div>
+            <table width="1000px">
+                <tr>
+                    <td style="padding:25px">
+                        <img src="assets/images/fig4.png" width="600px" />
+                    </td>
+                    <td style="padding:25px">
+                        <div class="text_div" style="font-size:22px"> <b> Learning from Auxiliary Views.</b> 
+                            For every ray we query the depth image from an auxilary image views with points along the ray.
+                            On the right we can see that views (a), (b), (c) offer information about different occluded segments along the ray.
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:25px">
+                        <img src="assets/images/fig3.png" width="600px" />
+                    </td>
+                    <td style="padding:25px">
+                        <div class="text_div" style="font-size:22px"> <b> Segment Types.</b> Every auxiliary view that observes the a ray creates segments along the ray.
+                        In an auxiliary view we can observe the ray entering the veiw and exiting it. These events happen because the ray originating from the camera either intersects with the scene geometry or under goes an ( dis)occlusion  event. We show in the image on the right one such segment <b>(s,e)</b>. In this case <b> s </b> is an dis-occlusion event and e is an interaction event. Every segment creates a different penalty regions that can used to train the DRDF function. We show an interactive demo of this in the <a href="#interactive-demo"> next section</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:25px">
+                        <img src="assets/images/fig2.png" width="600px" />
+                    </td>
+                    <td style="padding:25px">
+                        <div class="text_div" style="font-size:22px"> <b> Method overview.</b> At training time, our
+                            model takes an image and set of 3D points along rays. These points along the ray are supervised with  <a href="#interactive-demo">penalty functions</a> for different segments along the ray. We aggregarte the information across different auxilary views to create a ray signature. We require our network to predict the <a href="https://nileshkulkarni.github.io/scene_drdf"> DRDF </a> function for points in the scene. At inference we predict the DRDF for all points in the image frustum and decode it to a scene-gemoetry.</div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </center>
+    <br>
+    <hr>
+    <div>
+        <div id="interactive-demo">
+        <!-- <center> -->
+        <table width="1000px">
+            <tr>
+                <td class="td-center">
+                    <h1> Interactive Demo for Segment Penalty Plots</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    We show how different segments on the ray impose various penalty functions in (a), (b), (c), (d) for predicted DRDF values. On X-axis we interactively choose the  locations of Intersection (I) and Occlusion (O) events on the ray. 
+                    The position of these events determines which DRDF functions are admissible and which are not allowed. We plot the heat map of the penatly corresponding to the DRDF value (y-axis) for a given point along the ray (x-axis). 
+                    Regions with <span style="color: red;"> dark red</span> color corresponds to regions of high magnitude, and light grey correspond to low penalty regions.
+            </tr>
+        </table>
+        <!-- </center> -->
+        </div>
+    
+        <div >
+        <table width="1100px">
+            <tr>
+                <td>
+                <div id='penalty-ii'>
+                </div>
+                </td>
+                <td>
+                    <div id='penalty-oo'>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            <td>
+            <div class="slider-container">
+                <table>
+                <tr><td>
+                   <div id="slider-ii" style="width: 500px"></div> 
+                </td></tr>
+                <tr><td>
+                <div id="slider-label1-ii" class="slider-label" style="width: 500px">
+                      <div id="slider-label1-text-ii"> </div>
+                </div>
+                <div id="slider-label2-ii" class="slider-label" style="width: 500px">
+                    <div id="slider-label2-text-ii"> </div>
+                </div>
+                </td></tr>
+                <tr>
+                    <td><div style="height:10px"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        
+                        <b  style="font-size:22pt">(a)</b>
+                   
+                    </td class="td-center">
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <div style="width: 500px" >
+                        We can see that only permissible value of DRDF is along the specific line that are represented by brighter regions in the plot. 
+                        Moving the slider along moves this line parallel along the X-axis. This intersection segment imposes an equality constraint.
+                    </div>
+                    </td class="td-center">
+                </tr>
+                </table>
+            </div>
+            </td>
+            <td>
+            <div class="slider-container">
+                <table>
+                <tr><td>
+                    <div id="slider-oo" style="width: 500px"></div> 
+                </td></tr>
+                <tr><td>
+                <div id="slider-label1-oo" class="slider-label" style="width: 500px">
+                        <div id="slider-label1-text-oo"> </div>
+                </div>
+                <div id="slider-label2-oo" class="slider-label" style="width: 500px">
+                    <div id="slider-label2-text-oo"> </div>
+                </div>
+                </td></tr>
+                <tr>
+                    <td><div style="height:10px"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <b  style="font-size:22pt">(b)</b>
+                    </td class="td-center">
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <div style="width: 500px" >
+                        This plot shows that DRDF values cannot correspond any values inside the red strip, and this imposes an inequality constraint allowing DRDF to take values outside the region.
+                        Moving the <b>O</b> events  around leads to increasing and decreasing the width of the red strip.
+                    </div>
+                    </td class="td-center">
+                </tr>
+                </table>
+            </div>
+            </td>
+        </tr>
+            <tr>
+                <td><div style="height:50px"></div></td>
+            </tr>
+        </table>
+        <hr>
+        <table width="1100px">
+            <tr>
+                <td>
+                <div id='penalty-io'>
+                </div>
+                </td>
+                <td>
+                    <div id='penalty-oi'>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            <td>
+            <div class="slider-container">
+                <table>
+                <tr><td>
+                   <div id="slider-io" style="width: 500px"></div> 
+                </td></tr>
+                <tr><td>
+                <div id="slider-label1-io" class="slider-label" style="width: 500px">
+                      <div id="slider-label1-text-io"> </div>
+                </div>
+                <div id="slider-label2-io" class="slider-label" style="width: 500px">
+                    <div id="slider-label2-text-io"> </div>
+                </div>
+                </td></tr>
+                <tr>
+                    <td><div style="height:10px"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <b  style="font-size:22pt">(c)</b>
+                    </td class="td-center">
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <div style="width: 500px" >
+                        This is a combination of events in (a) and (b). Points on the ray closer to the I event can you take on a single DRDF value. 
+                        The points closer to the O event have to take on DRDF values such that there is no other intersection between the <b>IO</b> segment.
+                        This segment leads to an equality  + in-equality constraint.
+                    </div>
+                    </td class="td-center">
+                </tr>
+                </table>
+            </div>
+            </td>
+            <td>
+            <div class="slider-container">
+                <table>
+                <tr><td>
+                    <div id="slider-oi" style="width: 500px"></div> 
+                </td></tr>
+                <tr><td>
+                <div id="slider-label1-oi" class="slider-label" style="width: 500px">
+                        <div id="slider-label1-text-oi"> </div>
+                </div>
+                <div id="slider-label2-oi" class="slider-label" style="width: 500px">
+                    <div id="slider-label2-text-oi"> </div>
+                </div>
+                </td></tr>
+                <tr>
+                    <td><div style="height:10px"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <b  style="font-size:22pt">(d)</b>
+                    </td class="td-center">
+                </tr>
+                <tr>
+                    <td class="td-center">
+                        <div style="width: 500px" >
+                        This is a combination of events in (a) and (b). Points on the ray closer to the I event can you take on a single DRDF value. 
+                        The points closer to the O event have to take on DRDF values such that there is no other intersection between the <b>OI</b>  segment.
+                        This segment leads to an equality  + in-equality constraint.
+                    </div>
+                    </td class="td-center">
+                </tr>
+                </table>
+            </div>
+            </td>
+        <tr>
+            <td><div style="height:50px"></div></td>
+        </tr>
+
+        </tr>
+        </table>
+        </div>
+        </div>
+    <hr>
+    <center>
+        <table align=center width=1000px>
+            <!-- <h1>Approach</h1> -->
+            <tr>
+                <td class="td-center">
+                    <h1> Overview Video</h1>
+                </td>
+            </tr>
+        </table>
+        <div width=1000px>
+            <center>
+            <table align=center width="1000px">
+                <tr>
+                    <td>
+                        <iframe width="1000" height="461" src="https://www.youtube.com/embed/cp7iMF9JWHM" title="D2DRDF Overview (CVPR 23)" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                        </iframe>
+                    </td>
+                </tr>
+            </table>
+            </center>
+        </div>
+    </center>
+    <br>
+    <hr>
+
+
+    <table align=center width=1000px>
+        <!-- <h1>Approach</h1> -->
+        <tr>
+            <td class="td-center">
+                <h1> Paper</h1>
+            </td>
+        </tr>
+    </table>
+    <table align=center width=1000px>
+        <tr>
+            <td>
+                <table align=center width=650px>
+                    <tr>
+                        <td style="padding:25px"><a href="https://arxiv.org/"><img  class="layered-paper-big" style="height:250px"
+                                    src="./assets/paper.png" /></a></td>
+                        <td style="padding:25px"><span style="font-size:14pt">Kulkarni, Jin, Johnson, Fouhey<br><br>
+                                Learning to Predict Scene Level Implicit 3D from Posed RGBD data<br><br>
+                                CVPR, 2023
+                                <br>
+                                <!-- [hosted on <a href="#">arXiv</a>]</a> -->
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table align=center width=1000>
+        <tr>
+            <td>
+                <table align=center width=180px>
+                    <tr>
+                        <td><span style="font-size:14pt">
+                                <center>
+                                    <a href="assets/paper.pdf">[pdf]</a>
+                                </center>
+                        </td>
+                        <!-- <td><span style="font-size:14pt">
+                    <center>
+                        <a href="./assets/supp.pdf">[supp]</a>
+                    </center>
+                </td> -->
+
+                        <td><span style="font-size:14pt">
+                                <center>
+                                    <a href="./assets/bibtex.txt">[bibtex]</a>
+                                </center>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <hr>
+
+
+    <table align=center width=1000px>
+        <!-- <h1>Approach</h1> -->
+        <tr>
+            <td class="td-center">
+                <h1> Code</h1>
+                Coming soon...
+            </td>
+        </tr>
+    </table>
+
+    <table align=center width=1000px>
+        <tr>
+            <td>
+                <center> <br>
+                    <span style="font-size:28px">&nbsp;<a
+                            href='https://github.com/nileshkulkarni/d2drdf'>[GitHub]</a>
+
+                        <span style="font-size:28px"></a></span>
+                        <br>
+                </center>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+
+    <table align=center width=1000px>
+        <tr>
+            <td>
+                <left>
+                    <center>
+                        <h1>Acknowledgements</h1>
+                    </center>
+                    We thank our colleagues for the wonderful discussions on the project (in alphabetical order). Richard Higgins, Sarah Jabour, Dandan Shan, Karan Desai, Mohammed Banani,
+and Chris Rockwell for feedback. We acknowledge Shengyi Qian's help
+with <a href="https://github.com/facebookresearch/viewseg">ViewSeg </a> code used to implement the PixelNeRF baseline.
+Toyota Research Institute (“TRI”) provided funds to assist the authors
+with their research but this article solely reflects the opinions
+and conclusions of its authors and not TRI or any Toyota entity.
+                    NK was supported by TRI. Toyota Research Institute
+                    (''TRI'') provided funds to assist the authors with their research but this article solely reflects
+                    the opinions and conclusions of its authors and not TRI or any other Toyota entity. This base
+                    version
+                    of the template is borrowed from <a href="https://richzhang.github.io/colorization/">colorful
+                        folks</a>.
+                </left>
+            </td>
+        </tr>
+    </table>
+
+    <br><br>
+    <script src="./density.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.js"></script>
+    <!-- <div id="graph"></div> -->
+    <script>
+        // draw_slider()
+        // draw_slider_animate()
+        setup_slider('ii')
+        updateSliderValues(1.0, 2.0,'ii')
+        setup_slider('oo')
+        updateSliderValues(1.0, 2.0,'oo')
+        setup_slider('oi')
+        updateSliderValues(1.0, 2.0,'oi')
+        setup_slider('io')
+        updateSliderValues(1.0, 2.0,'io')
+        // updateSliderValues(1.1, 2.1)
+        // console.log('DRDF Penalty')
+        // console.log(iiValue(1,0, 1, 2))
+        // console.log(gtDRDF(1, 1, 2))
+        
+        // draw_example()
+    </script>
+</body>
+
+</html>
