@@ -16,7 +16,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-K8GV7XKZ6M');
+    gtag('config', 'G-K8GV7XKZ6M'); 
     </script>
     <script src=”http://code.jquery.com/jquery-1.9.1.js”></script>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -163,15 +163,6 @@
     <table align=center width=1000px>
         <tr>
             <td>
-                <center>
-                    <!-- <a href="./asserts/images/teaser.png"><img src="./resources/images/teaser.png"
-                            width="900px"></img></href></a><br> -->
-                    <embed src="./assets/figures/teaser.png" width="1100px" />
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <!-- <center>
                     <span style="font-size:22px">Our approach generates 3D from a single unseen image (left) while
                             training on real 3D scans. We show the two rendered novel views of our output (middle,
@@ -180,18 +171,12 @@
                             and floors behind the couch.
                 </center> -->
                 <div class="text_div" style="font-size:22px">
-                    We introduce a method that can learn to predict scene-level implicit functions for 3D reconstruction from posed RGBD data. 
-                    At test time, our system maps a previously unseen RGB image to a 3D reconstruction of a scene via implicit functions. 
-                    While implicit functions for 3D reconstruction have often been tied to meshes, we show that we can train one using only a set of posed RGBD images. 
-                    This setting may help 3D reconstruction unlock the sea of accelerometer+RGBD data that is coming with new phones. 
-                    Our system, D2-DRDF, can match and sometimes outperform current methods that use mesh supervision and shows better robustness to sparse data.
+                   <span> <b> TL;DR</b> A model to predict single image to 3D implicit function. D2-DRDF does not require mesh supervision at training and can directly work with captured raw RGB-D data. </span>
                 </div>
             </td>
         </tr>
     </table>
     <br>
-    <br>
-    <hr>
     <table align="center" width=1000px>
         <tr>
             <td class="td-center">
@@ -245,7 +230,24 @@
     </table>
     <hr>
     <br>
-
+    <table align=center width=1000px>
+        <tr>
+        <td class="td-center">
+            <h1> Abstract</h1>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="text_div" style="font-size:22px">
+                    We introduce a method that can learn to predict scene-level implicit functions for 3D reconstruction from posed RGBD data. 
+                    At test time, our system maps a previously unseen RGB image to a 3D reconstruction of a scene via implicit functions. 
+                    While implicit functions for 3D reconstruction have often been tied to meshes, we show that we can train one using only a set of posed RGBD images. 
+                    This setting may help 3D reconstruction unlock the sea of accelerometer+RGBD data that is coming with new phones. 
+                    Our system, D2-DRDF, can match and sometimes outperform current methods that use mesh supervision and shows better robustness to sparse data.
+                </div>
+            </td>
+        </tr>
+    </table>
     <table align=center width=1000px>
         <tr>
             <td class="td-center">
@@ -293,27 +295,27 @@
             <table width="1000px">
                 <tr>
                     <td style="padding:25px">
-                        <img src="assets/images/fig4.png" width="600px" />
+                        <img src="assets/images/fig4.png" width="500px" />
                     </td>
                     <td style="padding:25px">
                         <div class="text_div" style="font-size:22px"> <b> Learning from Auxiliary Views.</b> 
-                            For every ray we query the depth image from an auxilary image views with points along the ray.
-                            On the right we can see that views (a), (b), (c) offer information about different occluded segments along the ray.
+                            For every <span style="color:red;" > red ray </span>  from the reference camera (R) we query the depth image from an auxilary image views with points along the ray.
+                            On the right we can see that views (a), (b), (c) observe information about different occluded segments along the ray. This free-space information about segmentas along the ray allows us to design penalty functions to train the DRDF function.
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding:25px">
-                        <img src="assets/images/fig3.png" width="600px" />
+                        <img src="assets/images/fig3.png" width="500px" />
                     </td>
                     <td style="padding:25px">
                         <div class="text_div" style="font-size:22px"> <b> Segment Types.</b> Every auxiliary view that observes the a ray creates segments along the ray.
-                        In an auxiliary view we can observe the ray entering the veiw and exiting it. These events happen because the ray originating from the camera either intersects with the scene geometry or under goes an ( dis)occlusion  event. We show in the image on the right one such segment <b>(s,e)</b>. In this case <b> s </b> is an dis-occlusion event and e is an interaction event. Every segment creates a different penalty regions that can used to train the DRDF function. We show an interactive demo of this in the <a href="#interactive-demo"> next section</a></div>
+                        In an auxiliary view we can observe the ray entering the veiw and exiting it. These events happen because the ray originating from the camera either intersects with the scene geometry or under goes an (dis)occlusion  event. We show in the image on the right one such segment <b>(s,e)</b>. In this case <b> s </b> is an dis-occlusion event and e is an interaction event. Every segment creates a different penalty regions that can used to train the DRDF function. We show an interactive demo of this in the <a href="#interactive-demo"> next section</a></div>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding:25px">
-                        <img src="assets/images/fig2.png" width="600px" />
+                        <img src="assets/images/fig2.png" width="500px" />
                     </td>
                     <td style="padding:25px">
                         <div class="text_div" style="font-size:22px"> <b> Method overview.</b> At training time, our
