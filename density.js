@@ -300,7 +300,12 @@ function draw_example(value1, value2, seg_type) {
   var layout = {
     width: 500,
     height: 500,
-    title: title,
+    title: {
+      text: title,
+      font: {
+        size: 30 // Adjust the size as per your requirement
+      }
+    },
     yaxis: {
       range: [-1.0, 1.1],
       zeroline: false

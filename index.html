@@ -31,6 +31,8 @@
     <script src=”http://code.jquery.com/jquery-1.9.1.js”></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.css" />
@@ -245,7 +247,8 @@
         </tr>
     </table>
     <table align="center" width=1000px>
-        <tr><td style="font-size: 22px;"><div class="text_div"> <b>Our model's performance is showcased through sample results obtained from previously unseen images sourced from the Matterport3D (top) and OmniData (bottom) datasets.</b> D2-DRDF exhibits the capability to reconstruct hidden sections of the floor and the rear portion of the couch. Impressively, it can even reconstruct entire empty rooms located behind walls.
+        <tr><td style="font-size: 22px;"><div class="text_div"> <b> Sample results obtained from previously unseen images sourced from the Matterport3D (top) and OmniData (bottom) datasets.</b> D2-DRDF exhibits the capability to reconstruct hidden sections of the floor and the rear portion of the couch. 
+        <!-- Impressively, it can even reconstruct entire empty rooms located behind walls. -->
         </div></td></tr>
     </table>
     <hr>
@@ -362,7 +365,10 @@
             </tr>
             <tr>
                 <td>
-                    We demonstrate the influence of different segments along the ray on the imposition of distinct penalty functions in (a), (b), (c), (d) for predicted DRDF values. On the X-axis, we interactively select the positions of Intersection (I) and Occlusion (O) events along the ray. The placement of these events determines which DRDF functions are permissible and which are not. We generate a heat map to represent the penalty associated with the DRDF value (Y-axis) for a specific point along the ray (X-axis). Regions depicted in <span style="color:red;">dark red</span> indicate high penalty magnitude, while light grey regions indicate low penalty.
+                    We demonstrate the influence of different segments along the ray on the imposition of distinct penalty functions for predicted DRDF valuesn show below. On the X-axis, we interactively select the positions of Intersection (I) and Occlusion (O) events along the ray. The placement of these events determines which DRDF functions are penalized as inconsistent with the observed intersection or occlusion. We generate a heat map to represent the penalty associated with the DRDF value (Y-axis) for a specific point along the ray (X-axis). Regions depicted in <span style="color:red;">dark red</span> indicate high penalty magnitude, while light grey regions indicate low penalty. 
+                    <br><br>
+                    The key property of the DRDF function is for any point along the ray,  \(z \in [0, Z]\), if \(DRDF(z)= d\) then there is an intersection at point \( z + d \) on the ray. All the penalty segments below are the implicition of this equation.
+                    
             </tr>
         </table>
         <!-- </center> -->
@@ -408,7 +414,7 @@
                 <tr>
                     <td class="td-center">
                         <div style="width: 500px" > 
-                        We examine the portion of the ray that contains two intersection events (II). It is clear that the only DRDF values that meet the criteria align with the specific line depicted as brighter regions in the plot. Shifting the slider horizontally causes this line to move in parallel along the X-axis. This particular segment, denoted as II, imposes an equality constraint.
+                        You can observe that this plot represents the penalty function for a segment between two intersection events (II). It is clear that the only DRDF values that meet the criteria align slopped at -1, this specific line depicted as brighter regions in the plot with zero penalty. Shifting the slider horizontally causes this line to move in parallel along the X-axis. This particular segment, denoted as II, imposes an equality constraint.
                     </div>
                     </td class="td-center">
                 </tr>
@@ -440,7 +446,7 @@
                 <tr>
                     <td class="td-center">
                         <div style="width: 500px" >
-                        We examine the portion of the ray that contains two occlusion events (OO).
+                        You can observe that this plot represents ray segment between two occlusion events (OO).
                         The plot illustrates that DRDF values cannot fall within the red strip, establishing an inequality constraint that permits DRDF to take values outside of this region. By adjusting the positions of the <b>O</b> events, the width of the red strip can be increased or decreased.
                     </div>
                     </td class="td-center">
