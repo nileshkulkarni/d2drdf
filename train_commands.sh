@@ -1,0 +1,1 @@
+python run_scripts/train_drdf.py --cfg rgbd_drdf/config/train/base_train_drdf.yaml  --set NAME code_release_mesh_drdf_matterport_clip_tanh_v100  DATALOADER.DATASET_TYPE matterport TRAIN.NUM_EPOCHS 100 MODEL.ALLOW_CLIPPING  True MODEL.CLIP_ACTIVATION tanh TRAIN.NUM_WORKERS 16

@@ -1,0 +1,11 @@
+MATTERPORT_PATH: "data_dir/Matterport3d/scans/"
+DATALOADER:
+  SHUFFLE: False
+  SHUFFLE_ONCE: True
+  INFERENCE_ONLY: True
+  SPLIT: val
+NAME: gt_eval_data
+TEST:
+  NUM_ITER: 2000
+RAY:
+  NUM_WORKERS: 8

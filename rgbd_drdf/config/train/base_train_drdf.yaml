@@ -1,0 +1,10 @@
+_BASE_: ../base_train.yaml
+DATALOADER:
+  SAMPLING:
+    RAY_DIR_LST: ["C"]
+    N_RAYS_LST: [20]
+  SIGNED_RAY_DIST: True
+MODEL:
+  DIR_ENCODING: False
+
+MODEL_TYPE: drdf
