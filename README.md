@@ -34,11 +34,12 @@ mv cachedir.tar rgbd_drdf/
 cd rgbd_drdf && tar -xf cachedir.tar
 ```
 
+
 ### Download the pretrained model with preprocess data
 ```
 wget https://fouheylab.eecs.umich.edu/~nileshk/mv_drdf/cachedir_preprocessed.tar
 mv cachedir_preprocessed.tar rgbd_drdf/
-cd rgbd_drdf && tar -xf cachedir_preprocessed.tar
+cd rgbd_drdf && tar -xf cachedir_preprocessed.tar;  mv cachedir_preprocessed cachedir
 ```
 
 ## Matterport3D Dataset Setup
