@@ -29,7 +29,7 @@ python setup.py develop
 
 ### Download the pretrained model 
 ```
-wget https://fouheylab.eecs.umich.edu/~nileshk/mv_drdf/cachedir.tar
+wget https://www.dropbox.com/s/ac84yz28be1g8du/cachedir.tar?dl=0
 mv cachedir.tar rgbd_drdf/
 cd rgbd_drdf && tar -xf cachedir.tar
 ```
@@ -37,7 +37,7 @@ cd rgbd_drdf && tar -xf cachedir.tar
 
 ### Download the pretrained model with preprocess data
 ```
-wget https://fouheylab.eecs.umich.edu/~nileshk/mv_drdf/cachedir_preprocessed.tar
+wget https://www.dropbox.com/s/359xc7o9bizi5mw/cachedir_preprocessed.tar?dl=0
 mv cachedir_preprocessed.tar rgbd_drdf/
 cd rgbd_drdf && tar -xf cachedir_preprocessed.tar;  mv cachedir_preprocessed cachedir
 ```
